@@ -137,6 +137,37 @@
                       "1.0.0"
                   ]
               },
+              "core:geolocation": {
+                "$id": "#/properties/global/properties/core%3Ageolocation",
+                "description": "Used to store the location of the recording system. The location is stored as a single [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.txt) GeoJSON `point` Object using the convention defined by [RFC 5870](https://www.rfc-editor.org/rfc/rfc5870.txt). Per the GeoJSON specification, the point coordinates use the WGS84 coordinate reference system and are `longitude`, `latitude` (REQUIRED, in decimal degrees), and `altitude` (OPTIONAL, in meters above the WGS84 ellipsoid) - in that order. An example including the altitude field is shown below: ```JSON\n\"global\": {\n...\n\"core:geolocation\": {\n\"type\": \"Point\",\n\"coordinates\": [-107.6183682, 34.0787916, 2120.0]\n}\n...\n}```\nGeoJSON permits the use of *Foreign Members* in GeoJSON documents per RFC 7946 Section 6.1. Because the SigMF requirement for the `geolocation` field is to be a valid GeoJSON `point` Object, users MAY include *Foreign Member* fields here for user-defined purposes (position valid indication, GNSS SV counts, dillution of precision, accuracy, etc). It is strongly RECOMMENDED that all fields be documented in a SigMF Extension document. \n *Note:* Objects named `geometry` or `properties` are prohibited Foreign Members as specified in RFC 7946 Section 7.1.",
+                "type": "object",
+                "required": [
+                    "type",
+                    "coordinates"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "Point"
+                        ]
+                    },
+                    "coordinates": {
+                        "type": "array",
+                        "minItems": 2,
+                        "items": {
+                            "type": "number"
+                        }
+                    },
+                    "bbox": {
+                        "type": "array",
+                        "minItems": 4,
+                        "items": {
+                            "type": "number"
+                        }
+                    }
+                }
+            },
               "core:extensions": {
                   "$id": "#/properties/global/properties/core%3Aextensions",
                   "description": "The `core:extensions` field in the Global Object is an array of extension objects that describe SigMF extensions. Extension Objects MUST contain the three key/value pairs defined below, and MUST NOT contain any other fields.",
