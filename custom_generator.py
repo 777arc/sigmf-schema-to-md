@@ -18,8 +18,7 @@ def gen_table(d):
         newdict["Description"] = str(value.get("description", ""))
         table.append(newdict)
     md_table = markdown_table(table)
-    multiline = {"Field": 25, "Required": 8, "Type": 12, "Default": 9, "Description": 50}
-    md_table.set_params(quote=False, row_sep = 'markdown', multiline=multiline)
+    md_table.set_params(quote=False, row_sep = 'markdown', padding_weight='right')
     return md_table.get_markdown()
 
 markdown = ''
