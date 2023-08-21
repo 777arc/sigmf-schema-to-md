@@ -9,17 +9,12 @@ def gen_table(d):
     table = []
     for key, value in d["properties"].items():
         newdict = {"Field": key.replace('core:','')}
-        if key in d["required"]:
-            newdict["Required"] = "Required"
-        else:
-            newdict["Required"] = "Optional"
+        newdict["Required"] = "Required" if key in d["required"] else ""
         newdict["Type"] = value.get("type", "MISSING")
         newdict["Default"] = str(value.get("default", ""))
         newdict["Description"] = str(value.get("description", ""))
         table.append(newdict)
-    md_table = markdown_table(table)
-    md_table.set_params(quote=False, row_sep = 'markdown', padding_weight='right')
-    return md_table.get_markdown()
+    return markdown_table(table).set_params(quote=False, row_sep = 'markdown', padding_weight='right').get_markdown()
 
 markdown = ''
 markdown += data["properties"]["global"]["description"].replace('. ','.\n') + '\n\n'
