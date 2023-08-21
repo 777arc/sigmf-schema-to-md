@@ -4,8 +4,6 @@
 
 *   [Schema for SigMF Meta Files](./sigmf.md) – `https://github.com/sigmf/SigMF/spec/1.0.0/schema-meta`
 
-*   [Schema for SigMF Meta Files](./sigmf-1.md) – `https://github.com/sigmf/SigMF/spec/1.0.0/schema-meta`
-
 ## Other Schemas
 
 ### Objects
