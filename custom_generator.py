@@ -8,7 +8,7 @@ sigmf_schema.close()
 def gen_table(d):
     table = []
     for key, value in d["properties"].items():
-        newdict = {"Field": key.replace('core:','')}
+        newdict = {"Field": '`' + key.replace('core:','') + '`'}
         newdict["Required"] = "Required" if key in d["required"] else ""
         newdict["Type"] = value.get("type", "MISSING")
         newdict["Default"] = str(value.get("default", ""))
