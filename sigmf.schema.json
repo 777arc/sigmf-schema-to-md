@@ -253,6 +253,7 @@
           "items": {
               "$id": "#/properties/annotations/items",
               "type": "object",
+              "title": "Annotations Type",
               "anyOf": [
                   {
                       "$id": "#/properties/annotations/items/anyOf/0",

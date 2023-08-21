@@ -1,0 +1,3 @@
+## core:recorder Type
+
+`string`

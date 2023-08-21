@@ -1,0 +1,3 @@
+## core:generator Type
+
+`string`

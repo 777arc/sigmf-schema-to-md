@@ -1,0 +1,3 @@
+## core:collection Type
+
+`string`
