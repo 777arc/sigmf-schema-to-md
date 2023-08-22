@@ -1,11 +1,8 @@
 import yaml
 from py_markdown_table.markdown_table import markdown_table
 
-with open('sigmf.schema.yaml', 'r') as stream:
-    try:
-        data=yaml.safe_load(stream)
-    except yaml.YAMLError as e:
-        print(e)
+sigmf_version = 'v1.0.0'
+data=yaml.safe_load(open('sigmf.schema.yaml', 'r'))
 
 def gen_table(d):
     table = []
@@ -31,18 +28,16 @@ def gen_fields(d):
         fields_str += '\n'
     return fields_str
 
-markdown = '# Signal Metadata Format Specification v1.0.0\n\n'
-markdown += data["description"] + '\n'
-markdown += "## Global Object\n\n" + data["properties"]["global"]["description"].replace('. ','.\n') + '\n\n'
-markdown += gen_table(data["properties"]["global"]) + '\n\n'
-markdown += gen_fields(data["properties"]["global"])
-markdown += "## Captures Array\n\n" + data["properties"]["captures"]["description"] + '\n\n'
-markdown += gen_table(data["properties"]["captures"]["items"]["anyOf"][0]) + '\n\n'
-markdown += gen_fields(data["properties"]["captures"]["items"]["anyOf"][0])
-markdown += "## Annotations Array\n\n" + data["properties"]["annotations"]["description"] + '\n\n'
-markdown += gen_table(data["properties"]["annotations"]["items"]["anyOf"][0]) + '\n\n'
-markdown += gen_fields(data["properties"]["annotations"]["items"]["anyOf"][0])
+md = '# Signal Metadata Format Specification ' + sigmf_version + '\n\n'
+md += data["description"] + '\n'
+md += "## Global Object\n\n" + data["properties"]["global"]["description"].replace('. ','.\n') + '\n\n'
+md += gen_table(data["properties"]["global"]) + '\n\n'
+md += gen_fields(data["properties"]["global"])
+md += "## Captures Array\n\n" + data["properties"]["captures"]["description"] + '\n\n'
+md += gen_table(data["properties"]["captures"]["items"]["anyOf"][0]) + '\n\n'
+md += gen_fields(data["properties"]["captures"]["items"]["anyOf"][0])
+md += "## Annotations Array\n\n" + data["properties"]["annotations"]["description"] + '\n\n'
+md += gen_table(data["properties"]["annotations"]["items"]["anyOf"][0]) + '\n\n'
+md += gen_fields(data["properties"]["annotations"]["items"]["anyOf"][0])
 
-sigmf_markdown = open('sigmf.md', 'w')
-sigmf_markdown.write(markdown)
-sigmf_markdown.close()
+open('sigmf-spec.md', 'w').write(md)

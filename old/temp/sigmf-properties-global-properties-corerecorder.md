@@ -1,3 +1,0 @@
-## core:recorder Type
-
-`string`

@@ -1,3 +1,0 @@
-## core:hw Type
-
-`string`

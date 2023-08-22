@@ -1,3 +1,0 @@
-## core:comment Type
-
-`string`

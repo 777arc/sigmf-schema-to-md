@@ -1,3 +1,0 @@
-## core:label Type
-
-`string`
