@@ -18,7 +18,6 @@ Copyright of contributions to SigMF are retained by their original authors. All 
 
 ## Table of Contents
 
-- [Signal Metadata Format Specification v1.0.0](#signal-metadata-format-specification-v100)
 * [Abstract](#abstract)
 * [Copyright Notice](#copyright-notice)
 * [Table of Contents](#table-of-contents)
