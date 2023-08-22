@@ -187,6 +187,13 @@ The Signal Metadata Format (SigMF), <release>, <date of release>, https://sigmf.
 ## Acknowledgements
 
 This specification originated at the DARPA Brussels Hackfest 2017.
+A huge thanks to Ben for the early work creating the spec,
+Jacob for leading the SigMF effort over several years,
+Glen for maintaining the Python library,
+Marc for helping with community efforts and creating the JSON-schema-to-markdown script,
+Teque5 for the various helpful contributions,
+GNU Radio for allowing SigMF to be a part of its organization,
+and to every contributor of SigMF!
 
 ## SigMF File Types
 
