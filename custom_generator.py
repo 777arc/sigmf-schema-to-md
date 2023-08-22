@@ -33,13 +33,13 @@ def gen_fields(d):
 
 markdown = '# Signal Metadata Format Specification v1.0.0\n\n'
 markdown += data["description"] + '\n'
-markdown += "## Global\n\n" + data["properties"]["global"]["description"].replace('. ','.\n') + '\n\n'
+markdown += "## Global Object\n\n" + data["properties"]["global"]["description"].replace('. ','.\n') + '\n\n'
 markdown += gen_table(data["properties"]["global"]) + '\n\n'
 markdown += gen_fields(data["properties"]["global"])
-markdown += "## Captures\n\n" + data["properties"]["captures"]["description"] + '\n\n'
+markdown += "## Captures Array\n\n" + data["properties"]["captures"]["description"] + '\n\n'
 markdown += gen_table(data["properties"]["captures"]["items"]["anyOf"][0]) + '\n\n'
 markdown += gen_fields(data["properties"]["captures"]["items"]["anyOf"][0])
-markdown += "## Annotations\n\n" + data["properties"]["annotations"]["description"] + '\n\n'
+markdown += "## Annotations Array\n\n" + data["properties"]["annotations"]["description"] + '\n\n'
 markdown += gen_table(data["properties"]["annotations"]["items"]["anyOf"][0]) + '\n\n'
 markdown += gen_fields(data["properties"]["annotations"]["items"]["anyOf"][0])
 

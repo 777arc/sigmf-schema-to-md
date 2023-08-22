@@ -35,9 +35,7 @@ Copyright of contributions to SigMF are retained by their original authors. All 
         - [Extension Namespaces](#extension-namespaces)
     - [Global Object](#global-object)
     - [Captures Array](#captures-array)
-        - [Capture Segment Objects](#capture-segment-objects)
     - [Annotations Array](#annotations-array)
-        - [Annotation Segment Objects](#annotation-segment-objects)
     - [SigMF Collection Format](#sigmf-collection-format)
     - [SigMF Recording Objects](#sigmf-recording-objects)
 - [Licensing](#licensing)
@@ -524,7 +522,7 @@ The Signal Metadata Format (SigMF), <release>, <date of release>, https://sigmf.
 
 This specification originated at the DARPA Brussels Hackfest 2017.
 
-## Global
+## Global Object
 
 The `global` object consists of key/value pairs that provide information applicable to the entire Dataset.
 It contains the information that is minimally necessary to open and parse the Dataset file, as well as general information about the Recording itself.
@@ -782,7 +780,7 @@ default: []
 additionalItems: False
 items: {'$id': '#/properties/global/properties/core%3Aextensions/items', 'type': 'object', 'anyOf': [{'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0', 'required': ['name', 'version', 'optional'], 'type': 'object', 'properties': {'name': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/name', 'description': 'The name of the SigMF extension namespace.', 'type': 'string'}, 'version': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/version', 'description': 'The version of the extension namespace specification used.', 'examples': ['1.0.0'], 'type': 'string'}, 'optional': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/optional', 'description': 'If this field is `true`, the extension is REQUIRED to parse this Recording.', 'type': 'boolean'}}, 'additionalProperties': False}]}
 
-## Captures
+## Captures Array
 
 The `captures` value is an array of capture segment objects that
 describe the parameters of the signal capture. It MUST be sorted by the value
@@ -942,7 +940,7 @@ minimum: 0
 maximum: 18446744073709552000
 type: integer
 
-## Annotations
+## Annotations Array
 
 The `annotations` value is an array of annotation segment objects
 that describe anything regarding the signal data not part of the Captures and
