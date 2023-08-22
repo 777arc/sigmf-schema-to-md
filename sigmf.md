@@ -213,22 +213,22 @@ distribution in a SigMF `Archive`.
                 │                    ├──┐
                 │   (optional file)  │  │
                 └──────────┬─────────┘  │
-                            │            │            ┌─────────────────────┐
-                            │            │  stored in │                     │
-                            │ links      ├────────────►    SigMF Archive    │
-                            │            │            │                     │
-                            │            │            │   (optional file)   │
+                           │            │            ┌─────────────────────┐
+                           │            │  stored in │                     │
+                           │ links      ├────────────►    SigMF Archive    │
+                           │            │            │                     │
+                           │            │            │   (optional file)   │
                 ╔══════════▼══════════╗ │            └─────────────────────┘
                 ║                     ║ │
                 ║   SigMF Recording   ╟─┘
                 ║                     ║
                 ║ (base SigMF Object) ║
                 ╚══════════╤══════════╝
-                            │
-                            │ comprises
-                            │
-            ┌─────────────┴──────────────┐
-            │                            │
+                           │
+                           │ comprises
+                           │
+             ┌─────────────┴──────────────┐
+             │                            │
     ┌────────▼───────┐                    │
     │                │               ┌────▼────┐
     │ SigMF Metadata ├───────────────► Dataset │
@@ -238,13 +238,13 @@ distribution in a SigMF `Archive`.
                                 ┌─────────┴────────────┐
                                 │     is either        │
                                 │                      │
-                        ┌────────▼────────┐    ┌────────▼─────────┐
-                        │                 │    │                  │
-                        │  SigMF Dataset  │    │  Non-Conforming  │
-                        │                 │    │     Dataset      │
-                        │      (file)     │    │                  │
-                        └─────────────────┘    │      (file)      │
-                                            └──────────────────┘
+                       ┌────────▼────────┐    ┌────────▼─────────┐
+                       │                 │    │                  │
+                       │  SigMF Dataset  │    │  Non-Conforming  │
+                       │                 │    │     Dataset      │
+                       │      (file)     │    │                  │
+                       └─────────────────┘    │      (file)      │
+                                              └──────────────────┘
 ```
 
 Rules for all files:
