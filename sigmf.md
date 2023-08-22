@@ -18,9 +18,6 @@ Copyright of contributions to SigMF are retained by their original authors. All 
 
 ## Table of Contents
 
-* [Abstract](#abstract)
-* [Copyright Notice](#copyright-notice)
-* [Table of Contents](#table-of-contents)
 * [Introduction](#introduction)
 * [Conventions Used in this Document](#conventions-used-in-this-document)
 * [Licensing](#licensing)
