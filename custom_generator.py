@@ -27,7 +27,7 @@ def gen_fields(d):
         fields_str += value["description"] + '\n\n'
         for key2, value2 in d["properties"][key].items():
             if key2 != '$id' and key2 != 'description':
-                fields_str += key2 + ': ' + str(value2) + '  \n' # two spaces cause a linebreak instead of new paragraph
+                fields_str += '**' + key2 + '**: ' + str(value2) + '  \n' # two spaces cause a linebreak instead of new paragraph
         fields_str += '\n'
     return fields_str
 
