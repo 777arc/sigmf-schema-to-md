@@ -35,15 +35,14 @@ description: |
     * [SigMF Compliance](#sigmf-compliance)
     * [Citing SigMF](#citing-sigmf)
     * [Acknowledgements](#acknowledgements)
-    * [Specification](#specification)
-        + [SigMF File Types](#sigmf-file-types)
-        + [SigMF Dataset Format](#sigmf-dataset-format)
-        + [SigMF Metadata Format](#sigmf-metadata-format)
-        + [SigMF Collection Format](#sigmf-collection-format)
-        + [SigMF Recording Objects](#sigmf-recording-objects)
-        + [Global Object](#global-object)
-        + [Captures Array](#captures-array)
-        + [Annotations Array](#annotations-array)
+    * [SigMF File Types](#sigmf-file-types)
+    * [SigMF Dataset Format](#sigmf-dataset-format)
+    * [SigMF Metadata Format](#sigmf-metadata-format)
+    * [SigMF Collection Format](#sigmf-collection-format)
+    * [SigMF Recording Objects](#sigmf-recording-objects)
+    * [Global Object](#global-object)
+    * [Captures Array](#captures-array)
+    * [Annotations Array](#annotations-array)
 
     ## Introduction
 
@@ -61,6 +60,27 @@ description: |
     sharing of data, prevents the "bitrot" of datasets wherein details of the
     capture are lost over time, and makes it possible for different tools to operate
     on the same dataset, thus enabling data portability between tools and workflows.
+
+    The SigMF specification fundamentally describes two types of information:
+    datasets, and metadata associated with those datasets. Taken together, a Dataset
+    with its SigMF metadata is a SigMF `Recording`.
+
+    Datasets, for purposes of this specification, are sets of digital measurements
+    generically called `samples` in this document. The samples can represent any
+    time-varying source of information. They MAY, for example, be digital samples
+    created by digital synthesis or by an Analog-to-Digital Converter. They could
+    also be geolocation coordinates from a GNSS receiver, temperature readings
+    from a thermal sensor, or any other stored digital measurement information.
+
+    Metadata describes the Dataset with which it is associated. The metadata
+    includes information meant for the human users of the Dataset, such as a title
+    and description, and information meant for computer applications (tools) that
+    operate on the Dataset.
+
+    This specification defines a schema for metadata using a `core` namespace that 
+    is a reserved name and can only be defined by this specification. Other metadata
+    MAY be described by extension namespaces. This specification also defines a 
+    model and format for how SigMF data should be stored at-rest (on-disk) using JSON.
 
     ## Conventions Used in this Document
 
@@ -179,30 +199,7 @@ description: |
 
     This specification originated at the DARPA Brussels Hackfest 2017.
 
-    ## Specification
-
-    The SigMF specification fundamentally describes two types of information:
-    datasets, and metadata associated with those datasets. Taken together, a Dataset
-    with its SigMF metadata is a SigMF `Recording`.
-
-    Datasets, for purposes of this specification, are sets of digital measurements
-    generically called `samples` in this document. The samples can represent any
-    time-varying source of information. They MAY, for example, be digital samples
-    created by digital synthesis or by an Analog-to-Digital Converter. They could
-    also be geolocation coordinates from a GNSS receiver, temperature readings
-    from a thermal sensor, or any other stored digital measurement information.
-
-    Metadata describes the Dataset with which it is associated. The metadata
-    includes information meant for the human users of the Dataset, such as a title
-    and description, and information meant for computer applications (tools) that
-    operate on the Dataset.
-
-    This specification defines a schema for metadata using a `core` namespace that 
-    is a reserved name and can only be defined by this specification. Other metadata
-    MAY be described by extension namespaces. This specification also defines a 
-    model and format for how SigMF data should be stored at-rest (on-disk) using JSON.
-
-    ### SigMF File Types
+    ## SigMF File Types
 
     There are two fundamental filetypes defined by this specification: files with 
     metadata, and the files that contain the Datasets described by the metadata. There
@@ -295,7 +292,7 @@ description: |
     arbitrary directory structures, but the SigMF files within the Archive MUST
     adhere to all rules above when the archive is extracted.
 
-    ### SigMF Dataset Format
+    ## SigMF Dataset Format
 
     There are four orthogonal characteristics of sample data: complex or real, 
     floating-point or integer, bit-width, and endianness. The following ABNF 
@@ -345,7 +342,7 @@ description: |
     The data type specified by `core:data_type` applies to all channels of data
     both real and imaginary parts.
 
-    ### SigMF Metadata Format
+    ## SigMF Metadata Format
 
     SigMF metadata fundamentally takes the form of key/value pairs:
 
@@ -374,7 +371,7 @@ description: |
     All SigMF metadata is defined using the structural concepts of JSON, and when 
     stored on-disk, metadata MUST be proper JSON to be SigMF compliant.
 
-    #### Datatypes
+    ### Datatypes
 
     The values in each key/value pair MUST be one of the following datatypes.
 
@@ -390,7 +387,7 @@ description: |
     | object  | JSON `object`                          | An `object` of other values, as defined by the JSON standard. |
     | GeoJSON | GeoJSON `point` Object                 | A single GeoJSON `point` Object as defined by RFC 7946.       |
 
-    #### Namespaces
+    ### Namespaces
 
     Namespaces provide a way to further classify key/value pairs in metadata.
     This specification defines the `core` namespace. Only this specification
@@ -403,7 +400,7 @@ description: |
     defaults that are valid. All other fields are OPTIONAL, though they can be
     strongly RECOMMENDED.
 
-    ##### Extension Namespaces
+    #### Extension Namespaces
 
     Fields not defined in the Core namespace MAY be defined in extension
     namespaces. The SigMF specification defines some extension namespaces to
@@ -428,7 +425,7 @@ description: |
 
     NOTE - IT WAS AT THIS POINT IN THE ORIGINAL SPECS THAT WE INCLUDED THE GLOBAL/CAPTURES/ANNOTATIONS PORTION
 
-    ### SigMF Collection Format
+    ## SigMF Collection Format
 
     The `sigmf-collection` file contains metadata in a single top-level Object 
     called a `collection`. The Collection Object contains key/value pairs that 
@@ -496,7 +493,7 @@ description: |
     }
     ```
 
-    ### SigMF Recording Objects
+    ## SigMF Recording Objects
 
     `SigMF Recording Objects` reference the base-name of the SigMF Recording and the
     SHA512 hash of the Metadata file, and SHOULD BE specified as a JSON Object:
