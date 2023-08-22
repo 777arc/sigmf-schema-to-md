@@ -333,94 +333,126 @@ the context of a specific SigMF top-level Object - i.e., `global`,
 1. It is RECOMMENDED that an extension namespace file follow the structure of
 the canonical extension namespaces.
 
-
 ## Global
 
 The `global` object consists of key/value pairs that provide information applicable to the entire Dataset.
 It contains the information that is minimally necessary to open and parse the Dataset file, as well as general information about the Recording itself.
 
-|Field                              |Required|Type   |Default|Short Description                                                                                                 |
-|-----------------------------------|--------|-------|-------|------------------------------------------------------------------------------------------------------------------|
-|[`author`](#author)                |        |string |       |A text identifier for the author potentially including name, handle, email, and/or other ID like Amateur Call Sign|
-|[`collection`](#collection)        |        |string |       |The base filename of a `collection` with which this Recording is associated                                       |
-|[`dataset`](#dataset)              |        |string |       |The full filename of the Dataset file this Metadata file describes                                                |
-|[`data_doi`](#data_doi)            |        |string |       |The registered DOI (ISO 26324) for a Recording's Dataset file                                                     |
-|[`datatype`](#datatype)            |Required|string |cf32_le|The SigMF Dataset format of the stored samples in the Dataset file                                                |
-|[`description`](#description)      |        |string |       |A text description of the SigMF Recording                                                                         |
-|[`hw`](#hw)                        |        |string |       |A text description of the hardware used to make the Recording                                                     |
-|[`license`](#license)              |        |string |       |A URL for the license document under which the Recording is offered                                               |
-|[`metadata_only`](#metadata_only)  |        |boolean|       |Indicates the Metadata file is intentionally distributed without the Dataset                                      |
-|[`meta_doi`](#meta_doi)            |        |string |       |The registered DOI (ISO 26324) for a Recording's Metadata file                                                    |
-|[`num_channels`](#num_channels)    |        |integer|1      |Total number of interleaved channels in the Dataset file                                                          |
-|[`offset`](#offset)                |        |integer|0      |The index number of the first sample in the Dataset                                                               |
-|[`recorder`](#recorder)            |        |string |       |The name of the software used to make this SigMF Recording                                                        |
-|[`sample_rate`](#sample_rate)      |        |number |       |The sample rate of the signal in samples per second                                                               |
-|[`sha512`](#sha512)                |        |string |       |The SHA512 hash of the Dataset file associated with the SigMF file                                                |
-|[`trailing_bytes`](#trailing_bytes)|        |integer|       |The number of bytes to ignore at the end of a Non-Conforming Dataset file                                         |
-|[`version`](#version)              |Required|string |1.0.0  |The SHA512 hash of the Dataset file associated with the SigMF file                                                |
-|[`geolocation`](#geolocation)      |        |object |       |The `core:geolocation` field in the Global Object is used to store thelocation of the recording system            |
-|[`extensions`](#extensions)        |        |array  |[]     |The `core:extensions` field in the Global Object is an array of extension objects that describe SigMF extensions  |
-
-### author
-
-description: A text identifier for the author potentially including name, handle, email, and/or other ID like Amateur Call Sign.
-examples: ['Bruce Wayne bruce@waynetech.com', 'Bruce (K3X)']
-type: string
-
-### collection
-
-description: The base filename of a `collection` with which this Recording is associated.
-type: string
-
-### dataset
-
-description: The full filename of the Dataset file this Metadata file describes.
-type: string
-pattern: ^[^\/\\:*?"<>|]+(\.[^\/\\:*?"<>|]+)*$
-
-### data_doi
-
-description: The registered DOI (ISO 26324) for a Recording's Dataset file.
-type: string
+|Field                              |Required|Type   |Default|Short Description                                                                                                |
+|-----------------------------------|--------|-------|-------|-----------------------------------------------------------------------------------------------------------------|
+|[`datatype`](#datatype)            |Required|string |cf32_le|The SigMF Dataset format of the stored samples in the Dataset file                                               |
+|[`sample_rate`](#sample_rate)      |        |number |       |The sample rate of the signal in samples per second                                                              |
+|[`author`](#author)                |        |string |       |A text identifier for the author potentially including name, handle, email, and/or other ID like Amateur Call Sig|
+|[`collection`](#collection)        |        |string |       |The base filename of a `collection` with which this Recording is associated                                      |
+|[`dataset`](#dataset)              |        |string |       |The full filename of the Dataset file this Metadata file describes                                               |
+|[`data_doi`](#data_doi)            |        |string |       |The registered DOI (ISO 26324) for a Recording's Dataset file                                                    |
+|[`description`](#description)      |        |string |       |A text description of the SigMF Recording                                                                        |
+|[`hw`](#hw)                        |        |string |       |A text description of the hardware used to make the Recording                                                    |
+|[`license`](#license)              |        |string |       |A URL for the license document under which the Recording is offered                                              |
+|[`metadata_only`](#metadata_only)  |        |boolean|       |Indicates the Metadata file is intentionally distributed without the Dataset                                     |
+|[`meta_doi`](#meta_doi)            |        |string |       |The registered DOI (ISO 26324) for a Recording's Metadata file                                                   |
+|[`num_channels`](#num_channels)    |        |integer|1      |Total number of interleaved channels in the Dataset file                                                         |
+|[`offset`](#offset)                |        |integer|0      |The index number of the first sample in the Dataset                                                              |
+|[`recorder`](#recorder)            |        |string |       |The name of the software used to make this SigMF Recording                                                       |
+|[`sha512`](#sha512)                |        |string |       |The SHA512 hash of the Dataset file associated with the SigMF file                                               |
+|[`trailing_bytes`](#trailing_bytes)|        |integer|       |The number of bytes to ignore at the end of a Non-Conforming Dataset file                                        |
+|[`version`](#version)              |Required|string |1.0.0  |The SHA512 hash of the Dataset file associated with the SigMF file                                               |
+|[`geolocation`](#geolocation)      |        |object |       |The `core:geolocation` field in the Global Object is used to store thelocation of the recording system           |
+|[`extensions`](#extensions)        |        |array  |[]     |The `core:extensions` field in the Global Object is an array of extension objects that describe SigMF extensions |
 
 ### datatype
 
-description: The SigMF Dataset format of the stored samples in the Dataset file.
+The SigMF Dataset format of the stored samples in the Dataset file.
+
 examples: ['ri16_le']
 default: cf32_le
 pattern: ^(c|r)(f32|f64|i32|i16|u32|u16|i8|u8)(_le|_be)?$
 type: string
 
+### sample_rate
+
+The sample rate of the signal in samples per second.
+
+minimum: 0
+maximum: 1.7976931348623157e+308
+type: number
+
+### author
+
+A text identifier for the author potentially including name, handle, email, and/or other ID like Amateur Call Sign
+
+examples: ['Bruce Wayne bruce@waynetech.com', 'Bruce (K3X)']
+type: string
+
+### collection
+
+The base filename of a `collection` with which this Recording is associated.
+
+type: string
+
+### dataset
+
+The full filename of the Dataset file this Metadata file describes.
+If provided, this string MUST be the complete filename of the
+Dataset file, including the extension. The Dataset file must be in the local directory,
+and this string MUST NOT include any aspects of filepath other than the filename.
+
+If a Recording does not have this field, it MUST have a compliant SigMF Dataset (NOT
+a Non-Conforming Dataset) which MUST use the same base filename as the Metadata file
+and use the `.sigmf-data` extension. If a SigMF Recording or Archive is renamed this
+field MUST also be updated, because of this it is RECOMMENDED that Compliant SigMF
+Recordings avoid use of this field.
+
+This field SHOULD NOT be used in conjunction the `core:metadata_only` field. If both
+fields exist and the file specified by `core:dataset` exists, then `core:metadata_only`
+SHOULD be ignored by the application.\
+
+
+type: string
+pattern: ^[^\/\\:*?"<>|]+(\.[^\/\\:*?"<>|]+)*$
+
+### data_doi
+
+The registered DOI (ISO 26324) for a Recording's Dataset file.
+
+type: string
+
 ### description
 
-description: A text description of the SigMF Recording.
+A text description of the SigMF Recording.
+
 type: string
 
 ### hw
 
-description: A text description of the hardware used to make the Recording.
+A text description of the hardware used to make the Recording.
+
 type: string
 
 ### license
 
-description: A URL for the license document under which the Recording is offered. (RFC 3986)
+A URL for the license document under which the Recording is offered. (RFC 3986)
+
 examples: ['https://creativecommons.org/licenses/by-sa/4.0/']
 format: uri
 type: string
 
 ### metadata_only
 
-description: Indicates the Metadata file is intentionally distributed without the Dataset.
+Indicates the Metadata file is intentionally distributed without the Dataset.
+
 type: boolean
 
 ### meta_doi
 
-description: The registered DOI (ISO 26324) for a Recording's Metadata file.
+The registered DOI (ISO 26324) for a Recording's Metadata file.
+
 type: string
 
 ### num_channels
 
-description: Total number of interleaved channels in the Dataset file. If omitted, this defaults to one.
+Total number of interleaved channels in the Dataset file. If omitted, this defaults to one.
+
 default: 1
 minimum: 1
 maximum: 18446744073709552000
@@ -428,7 +460,8 @@ type: integer
 
 ### offset
 
-description: The index number of the first sample in the Dataset. If not provided, this value defaults to zero. Typically used when a Recording is split over multiple files. All sample indices in SigMF are absolute, and so all other indices referenced in metadata for this recording SHOULD be greater than or equal to this value.
+The index number of the first sample in the Dataset. If not provided, this value defaults to zero. Typically used when a Recording is split over multiple files. All sample indices in SigMF are absolute, and so all other indices referenced in metadata for this recording SHOULD be greater than or equal to this value.
+
 default: 0
 minimum: 0
 maximum: 18446744073709552000
@@ -436,39 +469,36 @@ type: integer
 
 ### recorder
 
-description: The name of the software used to make this SigMF Recording.
+The name of the software used to make this SigMF Recording.
+
 type: string
-
-### sample_rate
-
-description: The sample rate of the signal in samples per second.
-minimum: 0
-maximum: 1.7976931348623157e+308
-type: number
 
 ### sha512
 
-description: The SHA512 hash of the Dataset file associated with the SigMF file.
+The SHA512 hash of the Dataset file associated with the SigMF file.
+
 type: string
 pattern: ^[0-9a-fA-F]{128}$
 
 ### trailing_bytes
 
-description: The number of bytes to ignore at the end of a Non-Conforming Dataset file.
+The number of bytes to ignore at the end of a Non-Conforming Dataset file.
+
 type: integer
 exclusiveMinimum: 0
 maximum: 18446744073709552000
 
 ### version
 
-description: The SHA512 hash of the Dataset file associated with the SigMF file.
+The SHA512 hash of the Dataset file associated with the SigMF file.
+
 default: 1.0.0
 type: string
 enum: ['1.0.0']
 
 ### geolocation
 
-description: The `core:geolocation` field in the Global Object is used to store the
+The `core:geolocation` field in the Global Object is used to store the
 location of the recording system. The location is stored as a single
 [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.txt) GeoJSON `point` Object
 using the convention defined by [RFC 5870](https://www.rfc-editor.org/rfc/rfc5870.txt).
@@ -498,13 +528,15 @@ documented in a SigMF Extension document.
 *Note:* Objects named `geometry` or `properties` are prohibited Foreign Members
 as specified in RFC 7946 Section 7.1.
 
+
 type: object
 required: ['type', 'coordinates']
 properties: {'type': {'type': 'string', 'enum': ['Point']}, 'coordinates': {'type': 'array', 'minItems': 2, 'items': {'type': 'number'}}, 'bbox': {'type': 'array', 'minItems': 4, 'items': {'type': 'number'}}}
 
 ### extensions
 
-description: The `core:extensions` field in the Global Object is an array of extension objects that describe SigMF extensions. Extension Objects MUST contain the three key/value pairs defined below, and MUST NOT contain any other fields.
+The `core:extensions` field in the Global Object is an array of extension objects that describe SigMF extensions. Extension Objects MUST contain the three key/value pairs defined below, and MUST NOT contain any other fields.
+
 type: array
 default: []
 additionalItems: False
@@ -524,36 +556,41 @@ The `captures` value is an array of capture segment objects that describe the pa
 
 ### datetime
 
-description: An ISO-8601 string indicating the timestamp of the sample index specified by sample_start.
+An ISO-8601 string indicating the timestamp of the sample index specified by sample_start.
+
 examples: ['1955-11-05T14:00:00.000Z']
 pattern: ^([\+-]?\d{4}(?!\d{2}))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$
 type: string
 
 ### frequency
 
-description: The center frequency of the signal in Hz.
+The center frequency of the signal in Hz.
+
 type: number
 minimum: -1.7976931348623157e+308
 maximum: 1.7976931348623157e+308
 
 ### global_index
 
-description: The index of the sample referenced by `sample_start` relative to an original sample stream.
+The index of the sample referenced by `sample_start` relative to an original sample stream.
+
 type: integer
 minimum: 0
 maximum: 18446744073709552000
 
 ### header_bytes
 
-description: The number of bytes preceding a chunk of samples that are not sample data, used for NCDs.
+The number of bytes preceding a chunk of samples that are not sample data, used for NCDs.
+
 type: integer
 minimum: 0
 maximum: 18446744073709552000
 
 ### sample_start
 
+Index of first sample of this chunk.
+
 default: 0
-description: Index of first sample of this chunk.
 minimum: 0
 maximum: 18446744073709552000
 type: integer
@@ -575,52 +612,60 @@ The `annotations` value is an array of annotation segment objects that describe 
 
 ### comment
 
+A human-readable comment.
+
 default: 
-description: A human-readable comment.
 type: string
 
 ### freq_lower_edge
 
-description: The frequency (Hz) of the lower edge of the feature described by this annotation.
+The frequency (Hz) of the lower edge of the feature described by this annotation.
+
 type: number
 minimum: -1.7976931348623157e+308
 maximum: 1.7976931348623157e+308
 
 ### freq_upper_edge
 
-description: The frequency (Hz) of the upper edge of the feature described by this annotation.
+The frequency (Hz) of the upper edge of the feature described by this annotation.
+
 type: number
 minimum: -1.7976931348623157e+308
 maximum: 1.7976931348623157e+308
 
 ### generator
 
-description: Human-readable name of the entity that created this annotation.
+Human-readable name of the entity that created this annotation.
+
 type: string
 
 ### label
 
-description: A short form human/machine-readable label for the annotation.
+A short form human/machine-readable label for the annotation.
+
 type: string
 
 ### sample_count
 
-description: The number of samples that this Segment applies to.
+The number of samples that this Segment applies to.
+
 type: integer
 minimum: 0
 maximum: 18446744073709552000
 
 ### sample_start
 
+The sample index at which this Segment takes effect.
+
 default: 0
-description: The sample index at which this Segment takes effect.
 minimum: 0
 maximum: 18446744073709552000
 type: integer
 
 ### uuid
 
-description: RFC-4122 unique identifier.
+RFC-4122 unique identifier.
+
 format: uuid
 type: string
 

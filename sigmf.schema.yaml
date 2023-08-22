@@ -356,36 +356,53 @@ properties:
     - core:version
     type: object
     properties:
+      core:datatype:
+        "$id": "#/properties/global/properties/core%3Adatatype"
+        description: The SigMF Dataset format of the stored samples in the Dataset file.
+        examples:
+        - ri16_le
+        default: cf32_le
+        pattern: "^(c|r)(f32|f64|i32|i16|u32|u16|i8|u8)(_le|_be)?$"
+        type: string
+      core:sample_rate:
+        "$id": "#/properties/global/properties/core%3Asample_rate"
+        description: The sample rate of the signal in samples per second.
+        minimum: 0
+        maximum: 1.7976931348623157e+308
+        type: number
       core:author:
         "$id": "#/properties/global/properties/core%3Aauthor"
-        description: A text identifier for the author potentially including name,
-          handle, email, and/or other ID like Amateur Call Sign.
+        description: A text identifier for the author potentially including name, handle, email, and/or other ID like Amateur Call Sign
         examples:
         - Bruce Wayne bruce@waynetech.com
         - Bruce (K3X)
         type: string
       core:collection:
         "$id": "#/properties/global/properties/core%3Acollection"
-        description: The base filename of a `collection` with which this Recording
-          is associated.
+        description: The base filename of a `collection` with which this Recording is associated.
         type: string
       core:dataset:
         "$id": "#/properties/global/properties/core%3Adataset"
-        description: The full filename of the Dataset file this Metadata file describes.
+        description: |
+            The full filename of the Dataset file this Metadata file describes.
+            If provided, this string MUST be the complete filename of the
+            Dataset file, including the extension. The Dataset file must be in the local directory,
+            and this string MUST NOT include any aspects of filepath other than the filename.
+
+            If a Recording does not have this field, it MUST have a compliant SigMF Dataset (NOT
+            a Non-Conforming Dataset) which MUST use the same base filename as the Metadata file
+            and use the `.sigmf-data` extension. If a SigMF Recording or Archive is renamed this
+            field MUST also be updated, because of this it is RECOMMENDED that Compliant SigMF
+            Recordings avoid use of this field.
+
+            This field SHOULD NOT be used in conjunction the `core:metadata_only` field. If both
+            fields exist and the file specified by `core:dataset` exists, then `core:metadata_only`
+            SHOULD be ignored by the application.
         type: string
         pattern: ^[^\/\\:*?"<>|]+(\.[^\/\\:*?"<>|]+)*$
       core:data_doi:
         "$id": "#/properties/global/properties/core%3Adata_doi"
         description: The registered DOI (ISO 26324) for a Recording's Dataset file.
-        type: string
-      core:datatype:
-        "$id": "#/properties/global/properties/core%3Adatatype"
-        description: The SigMF Dataset format of the stored samples in the Dataset
-          file.
-        examples:
-        - ri16_le
-        default: cf32_le
-        pattern: "^(c|r)(f32|f64|i32|i16|u32|u16|i8|u8)(_le|_be)?$"
         type: string
       core:description:
         "$id": "#/properties/global/properties/core%3Adescription"
@@ -397,8 +414,7 @@ properties:
         type: string
       core:license:
         "$id": "#/properties/global/properties/core%3Alicense"
-        description: A URL for the license document under which the Recording is offered.
-          (RFC 3986)
+        description: A URL for the license document under which the Recording is offered. (RFC 3986)
         examples:
         - https://creativecommons.org/licenses/by-sa/4.0/
         format: uri
@@ -435,12 +451,6 @@ properties:
         "$id": "#/properties/global/properties/core%3Arecorder"
         description: The name of the software used to make this SigMF Recording.
         type: string
-      core:sample_rate:
-        "$id": "#/properties/global/properties/core%3Asample_rate"
-        description: The sample rate of the signal in samples per second.
-        minimum: 0
-        maximum: 1.7976931348623157e+308
-        type: number
       core:sha512:
         "$id": "#/properties/global/properties/core%3Asha512"
         description: The SHA512 hash of the Dataset file associated with the SigMF

@@ -15,7 +15,7 @@ def gen_table(d):
         newdict["Type"] = value.get("type", "MISSING")
         newdict["Default"] = str(value.get("default", ""))
         description = value.get("description", "")
-        indx = description.find('. ')
+        indx = description.find('.')
         newdict["Short Description"] = description[:indx].replace('\n','') # short description, which is up to the first period
         table.append(newdict)
     return markdown_table(table).set_params(quote=False, row_sep = 'markdown', padding_weight='right').get_markdown()
@@ -24,8 +24,9 @@ def gen_fields(d):
     fields_str = ''
     for key, value in d["properties"].items():
         fields_str += "### " + key.replace('core:','') + '\n\n'
+        fields_str += value["description"] + '\n\n'
         for key2, value2 in d["properties"][key].items():
-            if key2 != '$id':
+            if key2 != '$id' and key2 != 'description':
                 fields_str += key2 + ': ' + str(value2) + '\n'
         fields_str += '\n'
     return fields_str
