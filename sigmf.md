@@ -5,37 +5,27 @@
 The `global` object consists of key/value pairs that provide information applicable to the entire Dataset.
 It contains the information that is minimally necessary to open and parse the Dataset file, as well as general information about the Recording itself.
 
-|Field                              |Required|Type   |Default|Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|-----------------------------------|--------|-------|-------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|[`author`](#author)                |        |string |       |A text identifier for the author potentially including name, handle, email, and/or other ID like Amateur Call Sign.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|[`collection`](#collection)        |        |string |       |The base filename of a `collection` with which this Recording is associated.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|[`dataset`](#dataset)              |        |string |       |The full filename of the Dataset file this Metadata file describes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|[`data_doi`](#data_doi)            |        |string |       |The registered DOI (ISO 26324) for a Recording's Dataset file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|[`datatype`](#datatype)            |Required|string |cf32_le|The SigMF Dataset format of the stored samples in the Dataset file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|[`description`](#description)      |        |string |       |A text description of the SigMF Recording.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|[`hw`](#hw)                        |        |string |       |A text description of the hardware used to make the Recording.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|[`license`](#license)              |        |string |       |A URL for the license document under which the Recording is offered. (RFC 3986)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|[`metadata_only`](#metadata_only)  |        |boolean|       |Indicates the Metadata file is intentionally distributed without the Dataset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|[`meta_doi`](#meta_doi)            |        |string |       |The registered DOI (ISO 26324) for a Recording's Metadata file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|[`num_channels`](#num_channels)    |        |integer|1      |Total number of interleaved channels in the Dataset file. If omitted, this defaults to one.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|[`offset`](#offset)                |        |integer|0      |The index number of the first sample in the Dataset. If not provided, this value defaults to zero. Typically used when a Recording is split over multiple files. All sample indices in SigMF are absolute, and so all other indices referenced in metadata for this recording SHOULD be greater than or equal to this value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|[`recorder`](#recorder)            |        |string |       |The name of the software used to make this SigMF Recording.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|[`sample_rate`](#sample_rate)      |        |number |       |The sample rate of the signal in samples per second.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-|[`sha512`](#sha512)                |        |string |       |The SHA512 hash of the Dataset file associated with the SigMF file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|[`trailing_bytes`](#trailing_bytes)|        |integer|       |The number of bytes to ignore at the end of a Non-Conforming Dataset file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|[`version`](#version)              |Required|string |1.0.0  |The SHA512 hash of the Dataset file associated with the SigMF file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|[`geolocation`](#geolocation)      |        |object |       |Used to store the location of the recording system. The location is stored as a single [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.txt) GeoJSON `point` Object using the convention defined by [RFC 5870](https://www.rfc-editor.org/rfc/rfc5870.txt). Per the GeoJSON specification, the point coordinates use the WGS84 coordinate reference system and are `longitude`, `latitude` (REQUIRED, in decimal degrees), and `altitude` (OPTIONAL, in meters above the WGS84 ellipsoid) - in that order. An example including the altitude field is shown below: ```JSON
-"global": {
-...
-"core:geolocation": {
-"type": "Point",
-"coordinates": [-107.6183682, 34.0787916, 2120.0]
-}
-...
-}```
-GeoJSON permits the use of *Foreign Members* in GeoJSON documents per RFC 7946 Section 6.1. Because the SigMF requirement for the `geolocation` field is to be a valid GeoJSON `point` Object, users MAY include *Foreign Member* fields here for user-defined purposes (position valid indication, GNSS SV counts, dillution of precision, accuracy, etc). It is strongly RECOMMENDED that all fields be documented in a SigMF Extension document. 
- *Note:* Objects named `geometry` or `properties` are prohibited Foreign Members as specified in RFC 7946 Section 7.1.|
-|[`extensions`](#extensions)        |        |array  |[]     |The `core:extensions` field in the Global Object is an array of extension objects that describe SigMF extensions. Extension Objects MUST contain the three key/value pairs defined below, and MUST NOT contain any other fields.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|Field                              |Required|Type   |Default|Description                                                                                                       |
+|-----------------------------------|--------|-------|-------|------------------------------------------------------------------------------------------------------------------|
+|[`author`](#author)                |        |string |       |A text identifier for the author potentially including name, handle, email, and/or other ID like Amateur Call Sign|
+|[`collection`](#collection)        |        |string |       |The base filename of a `collection` with which this Recording is associated                                       |
+|[`dataset`](#dataset)              |        |string |       |The full filename of the Dataset file this Metadata file describes                                                |
+|[`data_doi`](#data_doi)            |        |string |       |The registered DOI (ISO 26324) for a Recording's Dataset file                                                     |
+|[`datatype`](#datatype)            |Required|string |cf32_le|The SigMF Dataset format of the stored samples in the Dataset file                                                |
+|[`description`](#description)      |        |string |       |A text description of the SigMF Recording                                                                         |
+|[`hw`](#hw)                        |        |string |       |A text description of the hardware used to make the Recording                                                     |
+|[`license`](#license)              |        |string |       |A URL for the license document under which the Recording is offered                                               |
+|[`metadata_only`](#metadata_only)  |        |boolean|       |Indicates the Metadata file is intentionally distributed without the Dataset                                      |
+|[`meta_doi`](#meta_doi)            |        |string |       |The registered DOI (ISO 26324) for a Recording's Metadata file                                                    |
+|[`num_channels`](#num_channels)    |        |integer|1      |Total number of interleaved channels in the Dataset file                                                          |
+|[`offset`](#offset)                |        |integer|0      |The index number of the first sample in the Dataset                                                               |
+|[`recorder`](#recorder)            |        |string |       |The name of the software used to make this SigMF Recording                                                        |
+|[`sample_rate`](#sample_rate)      |        |number |       |The sample rate of the signal in samples per second                                                               |
+|[`sha512`](#sha512)                |        |string |       |The SHA512 hash of the Dataset file associated with the SigMF file                                                |
+|[`trailing_bytes`](#trailing_bytes)|        |integer|       |The number of bytes to ignore at the end of a Non-Conforming Dataset file                                         |
+|[`version`](#version)              |Required|string |1.0.0  |The SHA512 hash of the Dataset file associated with the SigMF file                                                |
+|[`geolocation`](#geolocation)      |        |object |       |The `core:geolocation` field in the Global Object is used to store thelocation of the recording system            |
+|[`extensions`](#extensions)        |        |array  |[]     |The `core:extensions` field in the Global Object is an array of extension objects that describe SigMF extensions  |
 
 ### author
 
@@ -99,7 +89,7 @@ type: string
 description: Total number of interleaved channels in the Dataset file. If omitted, this defaults to one.
 default: 1
 minimum: 1
-maximum: 18446744073709551615
+maximum: 18446744073709552000
 type: integer
 
 ### offset
@@ -107,7 +97,7 @@ type: integer
 description: The index number of the first sample in the Dataset. If not provided, this value defaults to zero. Typically used when a Recording is split over multiple files. All sample indices in SigMF are absolute, and so all other indices referenced in metadata for this recording SHOULD be greater than or equal to this value.
 default: 0
 minimum: 0
-maximum: 18446744073709551615
+maximum: 18446744073709552000
 type: integer
 
 ### recorder
@@ -133,7 +123,7 @@ pattern: ^[0-9a-fA-F]{128}$
 description: The number of bytes to ignore at the end of a Non-Conforming Dataset file.
 type: integer
 exclusiveMinimum: 0
-maximum: 18446744073709551615
+maximum: 18446744073709552000
 
 ### version
 
@@ -144,17 +134,36 @@ enum: ['1.0.0']
 
 ### geolocation
 
-description: Used to store the location of the recording system. The location is stored as a single [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.txt) GeoJSON `point` Object using the convention defined by [RFC 5870](https://www.rfc-editor.org/rfc/rfc5870.txt). Per the GeoJSON specification, the point coordinates use the WGS84 coordinate reference system and are `longitude`, `latitude` (REQUIRED, in decimal degrees), and `altitude` (OPTIONAL, in meters above the WGS84 ellipsoid) - in that order. An example including the altitude field is shown below: ```JSON
+description: The `core:geolocation` field in the Global Object is used to store the
+location of the recording system. The location is stored as a single
+[RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.txt) GeoJSON `point` Object
+using the convention defined by [RFC 5870](https://www.rfc-editor.org/rfc/rfc5870.txt).
+Per the GeoJSON specification, the point coordinates use the WGS84 coordinate
+reference system and are `longitude`, `latitude` (REQUIRED, in decimal degrees),
+and `altitude` (OPTIONAL, in meters above the WGS84 ellipsoid) - in that order. An
+example including the altitude field is shown below:
+
+```JSON
 "global": {
-...
-"core:geolocation": {
-"type": "Point",
-"coordinates": [-107.6183682, 34.0787916, 2120.0]
+    ...
+    "core:geolocation": {
+    "type": "Point",
+    "coordinates": [-107.6183682, 34.0787916, 2120.0]
+    }
+    ...
 }
-...
-}```
-GeoJSON permits the use of *Foreign Members* in GeoJSON documents per RFC 7946 Section 6.1. Because the SigMF requirement for the `geolocation` field is to be a valid GeoJSON `point` Object, users MAY include *Foreign Member* fields here for user-defined purposes (position valid indication, GNSS SV counts, dillution of precision, accuracy, etc). It is strongly RECOMMENDED that all fields be documented in a SigMF Extension document. 
- *Note:* Objects named `geometry` or `properties` are prohibited Foreign Members as specified in RFC 7946 Section 7.1.
+```
+
+GeoJSON permits the use of *Foreign Members* in GeoJSON documents per RFC 7946
+Section 6.1. Because the SigMF requirement for the `geolocation` field is to be
+a valid GeoJSON `point` Object, users MAY include *Foreign Member* fields here
+for user-defined purposes (position valid indication, GNSS SV counts, dillution
+of precision, accuracy, etc). It is strongly RECOMMENDED that all fields be
+documented in a SigMF Extension document.
+
+*Note:* Objects named `geometry` or `properties` are prohibited Foreign Members
+as specified in RFC 7946 Section 7.1.
+
 type: object
 required: ['type', 'coordinates']
 properties: {'type': {'type': 'string', 'enum': ['Point']}, 'coordinates': {'type': 'array', 'minItems': 2, 'items': {'type': 'number'}}, 'bbox': {'type': 'array', 'minItems': 4, 'items': {'type': 'number'}}}
@@ -171,13 +180,13 @@ items: {'$id': '#/properties/global/properties/core%3Aextensions/items', 'type':
 
 The `captures` value is an array of capture segment objects that describe the parameters of the signal capture. It MUST be sorted by the value of each capture segment's `core:sample_start` key, ascending.
 
-|Field                          |Required|Type   |Default|Description                                                                                |
-|-------------------------------|--------|-------|-------|-------------------------------------------------------------------------------------------|
-|[`datetime`](#datetime)        |        |string |       |An ISO-8601 string indicating the timestamp of the sample index specified by sample_start. |
-|[`frequency`](#frequency)      |        |number |       |The center frequency of the signal in Hz.                                                  |
-|[`global_index`](#global_index)|        |integer|       |The index of the sample referenced by `sample_start` relative to an original sample stream.|
-|[`header_bytes`](#header_bytes)|        |integer|       |The number of bytes preceding a chunk of samples that are not sample data, used for NCDs.  |
-|[`sample_start`](#sample_start)|Required|integer|0      |Index of first sample of this chunk.                                                       |
+|Field                          |Required|Type   |Default|Description                                                                               |
+|-------------------------------|--------|-------|-------|------------------------------------------------------------------------------------------|
+|[`datetime`](#datetime)        |        |string |       |An ISO-8601 string indicating the timestamp of the sample index specified by sample_start |
+|[`frequency`](#frequency)      |        |number |       |The center frequency of the signal in Hz                                                  |
+|[`global_index`](#global_index)|        |integer|       |The index of the sample referenced by `sample_start` relative to an original sample stream|
+|[`header_bytes`](#header_bytes)|        |integer|       |The number of bytes preceding a chunk of samples that are not sample data, used for NCDs  |
+|[`sample_start`](#sample_start)|Required|integer|0      |Index of first sample of this chunk                                                       |
 
 ### datetime
 
@@ -198,37 +207,37 @@ maximum: 1.7976931348623157e+308
 description: The index of the sample referenced by `sample_start` relative to an original sample stream.
 type: integer
 minimum: 0
-maximum: 18446744073709551615
+maximum: 18446744073709552000
 
 ### header_bytes
 
 description: The number of bytes preceding a chunk of samples that are not sample data, used for NCDs.
 type: integer
 minimum: 0
-maximum: 18446744073709551615
+maximum: 18446744073709552000
 
 ### sample_start
 
 default: 0
 description: Index of first sample of this chunk.
 minimum: 0
-maximum: 18446744073709551615
+maximum: 18446744073709552000
 type: integer
 
 ## Annotations
 
 The `annotations` value is an array of annotation segment objects that describe anything regarding the signal data not part of the Captures and Global objects. It MUST be sorted by the value of each Annotation Segment's `core:sample_start` key, ascending.
 
-|Field                                |Required|Type   |Default|Description                                                                      |
-|-------------------------------------|--------|-------|-------|---------------------------------------------------------------------------------|
-|[`comment`](#comment)                |        |string |       |A human-readable comment.                                                        |
-|[`freq_lower_edge`](#freq_lower_edge)|        |number |       |The frequency (Hz) of the lower edge of the feature described by this annotation.|
-|[`freq_upper_edge`](#freq_upper_edge)|        |number |       |The frequency (Hz) of the upper edge of the feature described by this annotation.|
-|[`generator`](#generator)            |        |string |       |Human-readable name of the entity that created this annotation.                  |
-|[`label`](#label)                    |        |string |       |A short form human/machine-readable label for the annotation.                    |
-|[`sample_count`](#sample_count)      |Required|integer|       |The number of samples that this Segment applies to.                              |
-|[`sample_start`](#sample_start)      |Required|integer|0      |The sample index at which this Segment takes effect.                             |
-|[`uuid`](#uuid)                      |        |string |       |RFC-4122 unique identifier.                                                      |
+|Field                                |Required|Type   |Default|Description                                                                     |
+|-------------------------------------|--------|-------|-------|--------------------------------------------------------------------------------|
+|[`comment`](#comment)                |        |string |       |A human-readable comment                                                        |
+|[`freq_lower_edge`](#freq_lower_edge)|        |number |       |The frequency (Hz) of the lower edge of the feature described by this annotation|
+|[`freq_upper_edge`](#freq_upper_edge)|        |number |       |The frequency (Hz) of the upper edge of the feature described by this annotation|
+|[`generator`](#generator)            |        |string |       |Human-readable name of the entity that created this annotation                  |
+|[`label`](#label)                    |        |string |       |A short form human/machine-readable label for the annotation                    |
+|[`sample_count`](#sample_count)      |Required|integer|       |The number of samples that this Segment applies to                              |
+|[`sample_start`](#sample_start)      |Required|integer|0      |The sample index at which this Segment takes effect                             |
+|[`uuid`](#uuid)                      |        |string |       |RFC-4122 unique identifier                                                      |
 
 ### comment
 
@@ -265,14 +274,14 @@ type: string
 description: The number of samples that this Segment applies to.
 type: integer
 minimum: 0
-maximum: 18446744073709551615
+maximum: 18446744073709552000
 
 ### sample_start
 
 default: 0
 description: The sample index at which this Segment takes effect.
 minimum: 0
-maximum: 18446744073709551615
+maximum: 18446744073709552000
 type: integer
 
 ### uuid

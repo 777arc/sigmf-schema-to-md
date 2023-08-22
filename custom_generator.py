@@ -1,9 +1,11 @@
-import json
+import yaml
 from py_markdown_table.markdown_table import markdown_table
 
-sigmf_schema = open('sigmf.schema.json')
-data = json.load(sigmf_schema)
-sigmf_schema.close()
+with open('sigmf.schema.yaml', 'r') as stream:
+    try:
+        data=yaml.safe_load(stream)
+    except yaml.YAMLError as e:
+        print(e)
 
 def gen_table(d):
     table = []
@@ -12,7 +14,9 @@ def gen_table(d):
         newdict["Required"] = "Required" if key in d["required"] else ""
         newdict["Type"] = value.get("type", "MISSING")
         newdict["Default"] = str(value.get("default", ""))
-        newdict["Description"] = str(value.get("description", ""))
+        description = value.get("description", "")
+        indx = description.find('. ')
+        newdict["Description"] = description[:indx].replace('\n','') # short description, which is up to the first period
         table.append(newdict)
     return markdown_table(table).set_params(quote=False, row_sep = 'markdown', padding_weight='right').get_markdown()
 
