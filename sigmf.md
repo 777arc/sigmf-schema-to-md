@@ -18,34 +18,7 @@ Copyright of contributions to SigMF are retained by their original authors. All 
 
 ## Table of Contents
 
-**Table of Contents**
-
-- [Signal Metadata Format Specification v1.0.0](#signal-metadata-format-specification-v100)
-- [Abstract](#abstract)
-- [Copyright Notice](#copyright-notice)
-- [Table of Contents](#table-of-contents)
-- [Introduction](#introduction)
-- [Conventions Used in this Document](#conventions-used-in-this-document)
-- [Specification](#specification)
-    - [SigMF File Types](#sigmf-file-types)
-    - [SigMF Dataset Format](#sigmf-dataset-format)
-    - [SigMF Metadata Format](#sigmf-metadata-format)
-    - [Datatypes](#datatypes)
-    - [Namespaces](#namespaces)
-        - [Extension Namespaces](#extension-namespaces)
-    - [Global Object](#global-object)
-    - [Captures Array](#captures-array)
-    - [Annotations Array](#annotations-array)
-    - [SigMF Collection Format](#sigmf-collection-format)
-    - [SigMF Recording Objects](#sigmf-recording-objects)
-- [Licensing](#licensing)
-- [SigMF Compliance](#sigmf-compliance)
-    - [SigMF Schema Compliance](#sigmf-schema-compliance)
-    - [SigMF Recording Compliance](#sigmf-recording-compliance)
-    - [SigMF Collection Compliance](#sigmf-collection-compliance)
-    - [SigMF Application Compliance](#sigmf-application-compliance)
-- [Citing SigMF](#citing-sigmf)
-- [Acknowledgements](#acknowledgements)
+In GitHub, all the way to the right there is a table of contents icon you can use.
 
 ## Introduction
 
@@ -401,7 +374,7 @@ Example `top-level.sigmf-collection` file:
 }
 ```
 
-#### SigMF Recording Objects
+### SigMF Recording Objects
 
 `SigMF Recording Objects` reference the base-name of the SigMF Recording and the
 SHA512 hash of the Metadata file, and SHOULD BE specified as a JSON Object:
