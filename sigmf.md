@@ -777,8 +777,6 @@ In the example below, `extension-01` is used, but not necessary, and
 
 **type**: array  
 **default**: []  
-**additionalItems**: False  
-**items**: {'$id': '#/properties/global/properties/core%3Aextensions/items', 'type': 'object', 'anyOf': [{'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0', 'required': ['name', 'version', 'optional'], 'type': 'object', 'properties': {'name': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/name', 'description': 'The name of the SigMF extension namespace.', 'type': 'string'}, 'version': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/version', 'description': 'The version of the extension namespace specification used.', 'examples': ['1.0.0'], 'type': 'string'}, 'optional': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/optional', 'description': 'If this field is `true`, the extension is REQUIRED to parse this Recording.', 'type': 'boolean'}}, 'additionalProperties': False}]}  
 
 ## Captures Array
 
