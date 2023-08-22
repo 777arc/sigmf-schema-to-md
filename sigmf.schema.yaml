@@ -68,6 +68,103 @@ description: |
     Specific keywords with semantic meaning in the context of this specification 
     are capitalized after being introduced (e.g., Recording).
 
+    ## Licensing
+
+    Open licenses are RECOMMENDED but you can specify any license. You can refer to 
+    resources provided by the [Open Data Commons](https://opendatacommons.org/) when 
+    deciding which open license fits your needs best. Cornell University has also 
+    created [a guide](https://data.research.cornell.edu/content/intellectual-property#data-licensing) 
+    to help you make these choices.
+
+    ## SigMF Compliance
+
+    The term 'SigMF Compliant' is used throughout this document, which can take on
+    one of several contextually dependent meanings. In order for a schema,
+    Recording, or application to be 'SigMF Compliant', specific conditions MUST be
+    met, outlined in the following sections. Provided the below criteria are met, an
+    application or Recording can indicate that it is 'SigMF Compliant'.
+
+    ### SigMF Schema Compliance
+
+    In order to be 'SigMF Compliant', a schema MUST meet the following requirements:
+
+    1. Adheres to and supports the metadata file naming conventions, `objects`,
+    `namespaces`, and `names` specified by this document.
+    1. MUST contain all REQUIRED fields with the correct datatype listed the `core`
+    namespace, and any namespace listed in the `extensions` array.
+    1. MUST NOT contain fields that are not outlined in the `core` or a listed
+    `extensions` namespace.
+
+    ### SigMF Recording Compliance
+
+    In order to be 'SigMF Compliant', a Recording MUST meet the following
+    requirements:
+
+    1. The Recording's schema file MUST be SigMF Compliant.
+    1. Adheres to and supports the file naming conventions and Dataset formats
+    specified in this document.
+    1. Stores data using the on-disk representation described by the `datatype`.
+
+    Recordings with Non-Conforming Datasets MAY have SigMF Compliant schema, but
+    cannot be SigMF Compliant Recordings.
+
+    ### SigMF Collection Compliance
+
+    In order to be 'SigMF Compliant', a Collection must meet the following
+    requirements:
+
+    1. The collection MUST contain only compliant Recordings.
+    1. The Collection Object MUST only contain SigMF key/value pairs provided by
+    the core specification or a compliant SigMF extension.
+
+    ### SigMF Application Compliance
+
+    In order to be 'SigMF Compliant', an application MUST meet the following
+    requirements:
+
+    1. Is capable of parsing and loading SigMF Compliant Recordings. Support for
+    SigMF Collections and Archives is RECOMMENDED but not REQUIRED.
+    1. Adheres to and supports the file rules, Dataset formats, `objects`,
+    `namespaces`, and `names` specified by this document.
+    1. MUST be able to ignore any `object` or `namespace` not specified by this
+    document and still function normally.
+    1. Capture Segments referring to non-existent samples SHOULD be ignored.
+    1. MUST treat consecutive Capture Segments whose metadata is equivalent for
+    purposes of that application (i.e., it may be different in values ignored by
+    the application such as optional values or unknown extensions) as it would
+    a single segment.
+    1. MUST support parsing ALL required fields in the `core` namespace, and defines
+    which optional fields are used by the application.
+    1. MUST define which extensions are supported, parses ALL required fields in
+    listed extension namespaces, and defines which optional fields are used. This
+    definition can be in user documentation or within the code itself, though
+    explicit documentation is RECOMMENDED.
+    1. Support for ALL SigMF Datatypes is NOT REQUIRED as certain datatypes may not
+    make sense for a particular application, but Compliant applications MUST
+    define which datatypes are supported, and be capable of loading Compliant
+    Recordings using supported datatypes.
+
+    Compliant applications are NOT REQUIRED to support Non-Conforming Datasets or
+    Metadata Only schema files, but it is RECOMMENDED that they parse the respective
+    metadata fields in the `global` Object to provide descriptive messages to users
+    regarding why the files are not supported.
+
+    Support for SigMF Collections is OPTIONAL for SigMF Compliant applications,
+    however it is RECOMMENDED that applications implementing SigMF make use of
+    Collections when appropriate for interoperability and consistency.
+
+    ## Citing SigMF
+
+    To cite the SigMF specification, we recommend the following format:
+
+    ```txt
+    The Signal Metadata Format (SigMF), <release>, <date of release>, https://sigmf.org
+    ```
+
+    ## Acknowledgements
+
+    This specification originated at the DARPA Brussels Hackfest 2017.
+
     ## Specification
 
     The SigMF specification fundamentally describes two types of information:
@@ -408,107 +505,6 @@ description: |
     Additional optional user fields MAY be added to `SigMF Recording Objects` if
     they are defined in a compliant SigMF extension. Additional fields are NOT
     permitted in tuples.
-
-    ## Licensing
-
-    Open licenses are RECOMMENDED but you can specify any license. You can refer to 
-    resources provided by the [Open Data Commons](https://opendatacommons.org/) when 
-    deciding which open license fits your needs best. Cornell University has also 
-    created [a guide](https://data.research.cornell.edu/content/intellectual-property#data-licensing) 
-    to help you make these choices.
-
-    ## SigMF Compliance
-
-    The term 'SigMF Compliant' is used throughout this document, which can take on
-    one of several contextually dependent meanings. In order for a schema,
-    Recording, or application to be 'SigMF Compliant', specific conditions MUST be
-    met, outlined in the following sections. Provided the below criteria are met, an
-    application or Recording can indicate that it is 'SigMF Compliant'.
-
-    ### SigMF Schema Compliance
-
-    In order to be 'SigMF Compliant', a schema MUST meet the following requirements:
-
-    1. Adheres to and supports the metadata file naming conventions, `objects`,
-    `namespaces`, and `names` specified by this document.
-    1. MUST contain all REQUIRED fields with the correct datatype listed the `core`
-    namespace, and any namespace listed in the `extensions` array.
-    1. MUST NOT contain fields that are not outlined in the `core` or a listed
-    `extensions` namespace.
-
-    ### SigMF Recording Compliance
-
-    In order to be 'SigMF Compliant', a Recording MUST meet the following
-    requirements:
-
-    1. The Recording's schema file MUST be SigMF Compliant.
-    1. Adheres to and supports the file naming conventions and Dataset formats
-    specified in this document.
-    1. Stores data using the on-disk representation described by the `datatype`.
-
-    Recordings with Non-Conforming Datasets MAY have SigMF Compliant schema, but
-    cannot be SigMF Compliant Recordings.
-
-    ### SigMF Collection Compliance
-
-    In order to be 'SigMF Compliant', a Collection must meet the following
-    requirements:
-
-    1. The collection MUST contain only compliant Recordings.
-    1. The Collection Object MUST only contain SigMF key/value pairs provided by
-    the core specification or a compliant SigMF extension.
-
-    ### SigMF Application Compliance
-
-    In order to be 'SigMF Compliant', an application MUST meet the following
-    requirements:
-
-    1. Is capable of parsing and loading SigMF Compliant Recordings. Support for
-    SigMF Collections and Archives is RECOMMENDED but not REQUIRED.
-    1. Adheres to and supports the file rules, Dataset formats, `objects`,
-    `namespaces`, and `names` specified by this document.
-    1. MUST be able to ignore any `object` or `namespace` not specified by this
-    document and still function normally.
-    1. Capture Segments referring to non-existent samples SHOULD be ignored.
-    1. MUST treat consecutive Capture Segments whose metadata is equivalent for
-    purposes of that application (i.e., it may be different in values ignored by
-    the application such as optional values or unknown extensions) as it would
-    a single segment.
-    1. MUST support parsing ALL required fields in the `core` namespace, and defines
-    which optional fields are used by the application.
-    1. MUST define which extensions are supported, parses ALL required fields in
-    listed extension namespaces, and defines which optional fields are used. This
-    definition can be in user documentation or within the code itself, though
-    explicit documentation is RECOMMENDED.
-    1. Support for ALL SigMF Datatypes is NOT REQUIRED as certain datatypes may not
-    make sense for a particular application, but Compliant applications MUST
-    define which datatypes are supported, and be capable of loading Compliant
-    Recordings using supported datatypes.
-
-    Compliant applications are NOT REQUIRED to support Non-Conforming Datasets or
-    Metadata Only schema files, but it is RECOMMENDED that they parse the respective
-    metadata fields in the `global` Object to provide descriptive messages to users
-    regarding why the files are not supported.
-
-    Support for SigMF Collections is OPTIONAL for SigMF Compliant applications,
-    however it is RECOMMENDED that applications implementing SigMF make use of
-    Collections when appropriate for interoperability and consistency.
-
-    ## Citing SigMF
-
-    To cite the SigMF specification, we recommend the following format:
-
-    ```txt
-    The Signal Metadata Format (SigMF), <release>, <date of release>, https://sigmf.org
-    ```
-
-    ## Acknowledgements
-
-    This specification originated at the DARPA Brussels Hackfest 2017.
-
-
-
-
 type: object
 properties:
   global:
