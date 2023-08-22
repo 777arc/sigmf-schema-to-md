@@ -554,34 +554,25 @@ It contains the information that is minimally necessary to open and parse the Da
 The SigMF Dataset format of the stored samples in the Dataset file.
 
 examples: ['ri16_le']
-
-default: cf32_le
-
-pattern: ^(c|r)(f32|f64|i32|i16|u32|u16|i8|u8)(_le|_be)?$
-
-type: string
-
-
+  default: cf32_le
+  pattern: ^(c|r)(f32|f64|i32|i16|u32|u16|i8|u8)(_le|_be)?$
+  type: string
+  
 ### sample_rate
 
 The sample rate of the signal in samples per second.
 
 minimum: 0
-
-maximum: 1.7976931348623157e+308
-
-type: number
-
-
+  maximum: 1.7976931348623157e+308
+  type: number
+  
 ### author
 
 A text identifier for the author potentially including name, handle, email, and/or other ID like Amateur Call Sign
 
 examples: ['Bruce Wayne bruce@waynetech.com', 'Bruce (K3X)']
-
-type: string
-
-
+  type: string
+  
 ### collection
 
 The base filename of a `collection` with which this Recording is associated.
@@ -592,8 +583,7 @@ field to associate up to the relevant `sigmf-collection` file.
 
 
 type: string
-
-
+  
 ### dataset
 
 The full filename of the Dataset file this Metadata file describes.
@@ -613,42 +603,34 @@ SHOULD be ignored by the application.
 
 
 type: string
-
-pattern: ^[^\/\\:*?"<>|]+(\.[^\/\\:*?"<>|]+)*$
-
-
+  pattern: ^[^\/\\:*?"<>|]+(\.[^\/\\:*?"<>|]+)*$
+  
 ### data_doi
 
 The registered DOI (ISO 26324) for a Recording's Dataset file.
 
 type: string
-
-
+  
 ### description
 
 A text description of the SigMF Recording.
 
 type: string
-
-
+  
 ### hw
 
 A text description of the hardware used to make the Recording.
 
 type: string
-
-
+  
 ### license
 
 A URL for the license document under which the Recording is offered. (RFC 3986)
 
 examples: ['https://creativecommons.org/licenses/by-sa/4.0/']
-
-format: uri
-
-type: string
-
-
+  format: uri
+  type: string
+  
 ### metadata_only
 
 Indicates the Metadata file is intentionally distributed without the Dataset.
@@ -664,57 +646,44 @@ conjunction with Non-Conforming Datasets or the `core:dataset` field.
 
 
 type: boolean
-
-
+  
 ### meta_doi
 
 The registered DOI (ISO 26324) for a Recording's Metadata file.
 
 type: string
-
-
+  
 ### num_channels
 
 Total number of interleaved channels in the Dataset file. If omitted, this defaults to one.
 
 default: 1
-
-minimum: 1
-
-maximum: 18446744073709552000
-
-type: integer
-
-
+  minimum: 1
+  maximum: 18446744073709552000
+  type: integer
+  
 ### offset
 
 The index number of the first sample in the Dataset. If not provided, this value defaults to zero. Typically used when a Recording is split over multiple files. All sample indices in SigMF are absolute, and so all other indices referenced in metadata for this recording SHOULD be greater than or equal to this value.
 
 default: 0
-
-minimum: 0
-
-maximum: 18446744073709552000
-
-type: integer
-
-
+  minimum: 0
+  maximum: 18446744073709552000
+  type: integer
+  
 ### recorder
 
 The name of the software used to make this SigMF Recording.
 
 type: string
-
-
+  
 ### sha512
 
 The SHA512 hash of the Dataset file associated with the SigMF file.
 
 type: string
-
-pattern: ^[0-9a-fA-F]{128}$
-
-
+  pattern: ^[0-9a-fA-F]{128}$
+  
 ### trailing_bytes
 
 The number of bytes to ignore at the end of a Non-Conforming Dataset file.
@@ -724,23 +693,17 @@ be used to ignore footer data in non-SigMF filetypes.
 
 
 type: integer
-
-exclusiveMinimum: 0
-
-maximum: 18446744073709552000
-
-
+  exclusiveMinimum: 0
+  maximum: 18446744073709552000
+  
 ### version
 
 The SHA512 hash of the Dataset file associated with the SigMF file.
 
 default: 1.0.0
-
-type: string
-
-enum: ['1.0.0']
-
-
+  type: string
+  enum: ['1.0.0']
+  
 ### geolocation
 
 The `core:geolocation` field in the Global Object is used to store the
@@ -775,12 +738,9 @@ as specified in RFC 7946 Section 7.1.
 
 
 type: object
-
-required: ['type', 'coordinates']
-
-properties: {'type': {'type': 'string', 'enum': ['Point']}, 'coordinates': {'type': 'array', 'minItems': 2, 'items': {'type': 'number'}}, 'bbox': {'type': 'array', 'minItems': 4, 'items': {'type': 'number'}}}
-
-
+  required: ['type', 'coordinates']
+  properties: {'type': {'type': 'string', 'enum': ['Point']}, 'coordinates': {'type': 'array', 'minItems': 2, 'items': {'type': 'number'}}, 'bbox': {'type': 'array', 'minItems': 4, 'items': {'type': 'number'}}}
+  
 ### extensions
 
 The `core:extensions` field in the Global Object is an array of extension objects that describe SigMF extensions.
@@ -816,14 +776,10 @@ In the example below, `extension-01` is used, but not necessary, and
 
 
 type: array
-
-default: []
-
-additionalItems: False
-
-items: {'$id': '#/properties/global/properties/core%3Aextensions/items', 'type': 'object', 'anyOf': [{'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0', 'required': ['name', 'version', 'optional'], 'type': 'object', 'properties': {'name': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/name', 'description': 'The name of the SigMF extension namespace.', 'type': 'string'}, 'version': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/version', 'description': 'The version of the extension namespace specification used.', 'examples': ['1.0.0'], 'type': 'string'}, 'optional': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/optional', 'description': 'If this field is `true`, the extension is REQUIRED to parse this Recording.', 'type': 'boolean'}}, 'additionalProperties': False}]}
-
-
+  default: []
+  additionalItems: False
+  items: {'$id': '#/properties/global/properties/core%3Aextensions/items', 'type': 'object', 'anyOf': [{'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0', 'required': ['name', 'version', 'optional'], 'type': 'object', 'properties': {'name': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/name', 'description': 'The name of the SigMF extension namespace.', 'type': 'string'}, 'version': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/version', 'description': 'The version of the extension namespace specification used.', 'examples': ['1.0.0'], 'type': 'string'}, 'optional': {'$id': '#/properties/global/properties/core%3Aextensions/items/anyOf/0/properties/optional', 'description': 'If this field is `true`, the extension is REQUIRED to parse this Recording.', 'type': 'boolean'}}, 'additionalProperties': False}]}
+  
 ## Captures Array
 
 The `captures` value is an array of capture segment objects that
@@ -877,23 +833,17 @@ of digits for fractional seconds is permitted.
 
 
 examples: ['1955-11-05T14:00:00.000Z']
-
-pattern: ^([\+-]?\d{4}(?!\d{2}))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$
-
-type: string
-
-
+  pattern: ^([\+-]?\d{4}(?!\d{2}))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$
+  type: string
+  
 ### frequency
 
 The center frequency of the signal in Hz.
 
 type: number
-
-minimum: -1.7976931348623157e+308
-
-maximum: 1.7976931348623157e+308
-
-
+  minimum: -1.7976931348623157e+308
+  maximum: 1.7976931348623157e+308
+  
 ### global_index
 
 The index of the sample referenced by `sample_start` relative to an original sample stream.
@@ -929,12 +879,9 @@ datastream, indicating that 500 samples were lost before they could be recorded.
 
 
 type: integer
-
-minimum: 0
-
-maximum: 18446744073709552000
-
-
+  minimum: 0
+  maximum: 18446744073709552000
+  
 ### header_bytes
 
 The number of bytes preceding a chunk of samples that are not sample data, used for NCDs.
@@ -976,12 +923,9 @@ of the previous Segment of samples plus two headers).
 
 
 type: integer
-
-minimum: 0
-
-maximum: 18446744073709552000
-
-
+  minimum: 0
+  maximum: 18446744073709552000
+  
 ### sample_start
 
 Index of first sample of this chunk.
@@ -992,14 +936,10 @@ Datasets only contain sample data.
 
 
 default: 0
-
-minimum: 0
-
-maximum: 18446744073709552000
-
-type: integer
-
-
+  minimum: 0
+  maximum: 18446744073709552000
+  type: integer
+  
 ## Annotations Array
 
 The `annotations` value is an array of annotation segment objects
@@ -1034,10 +974,8 @@ the Dataset, in all other cases `sample_count` MUST be provided.
 A human-readable comment.
 
 default: 
-
-type: string
-
-
+  type: string
+  
 ### freq_lower_edge
 
 The frequency (Hz) of the lower edge of the feature described by this annotation.
@@ -1051,30 +989,23 @@ allowed.
 
 
 type: number
-
-minimum: -1.7976931348623157e+308
-
-maximum: 1.7976931348623157e+308
-
-
+  minimum: -1.7976931348623157e+308
+  maximum: 1.7976931348623157e+308
+  
 ### freq_upper_edge
 
 The frequency (Hz) of the upper edge of the feature described by this annotation.
 
 type: number
-
-minimum: -1.7976931348623157e+308
-
-maximum: 1.7976931348623157e+308
-
-
+  minimum: -1.7976931348623157e+308
+  maximum: 1.7976931348623157e+308
+  
 ### generator
 
 Human-readable name of the entity that created this annotation.
 
 type: string
-
-
+  
 ### label
 
 A short form human/machine-readable label for the annotation.
@@ -1085,38 +1016,28 @@ this field be capable of displaying up to 20 characters.
 
 
 type: string
-
-
+  
 ### sample_count
 
 The number of samples that this Segment applies to.
 
 type: integer
-
-minimum: 0
-
-maximum: 18446744073709552000
-
-
+  minimum: 0
+  maximum: 18446744073709552000
+  
 ### sample_start
 
 The sample index at which this Segment takes effect.
 
 default: 0
-
-minimum: 0
-
-maximum: 18446744073709552000
-
-type: integer
-
-
+  minimum: 0
+  maximum: 18446744073709552000
+  type: integer
+  
 ### uuid
 
 RFC-4122 unique identifier.
 
 format: uuid
-
-type: string
-
-
+  type: string
+  
