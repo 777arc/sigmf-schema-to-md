@@ -16,7 +16,7 @@ def gen_table(d):
         newdict["Default"] = str(value.get("default", ""))
         description = value.get("description", "")
         indx = description.find('. ')
-        newdict["Description"] = description[:indx].replace('\n','') # short description, which is up to the first period
+        newdict["Short Description"] = description[:indx].replace('\n','') # short description, which is up to the first period
         table.append(newdict)
     return markdown_table(table).set_params(quote=False, row_sep = 'markdown', padding_weight='right').get_markdown()
 
@@ -30,7 +30,8 @@ def gen_fields(d):
         fields_str += '\n'
     return fields_str
 
-markdown = '# SigMF Specification\n\n'
+markdown = '# Signal Metadata Format Specification v1.0.0\n\n'
+markdown += data["description"] + '\n'
 markdown += "## Global\n\n" + data["properties"]["global"]["description"].replace('. ','.\n') + '\n\n'
 markdown += gen_table(data["properties"]["global"]) + '\n\n'
 markdown += gen_fields(data["properties"]["global"])
